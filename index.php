@@ -17,8 +17,8 @@
 <body>
 
 <div class ="container">
-   <a href= "create.php"><button type="button" class="btn btn-info">Add Meal</button></a>
-   <table class="table table-bordered">
+  
+   <table class="table table-bordered mt-5">
        <thead>
            <tr>
                <th scope="col">image</th>
@@ -27,8 +27,11 @@
                <th scope="col">price</th>
                <th scope="col">allergens</th>
            </tr>
+
        </thead>
+
        <tbody>
+
            
        <?php
            $sql = "SELECT * FROM meals";
@@ -37,7 +40,7 @@
             if($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                    echo  "<tr>
-                       <td>" .$row['image']."</td>
+                       <td><img src=". $row['image'] ." alt='image' class='img-thumbnail' style='width:100px; height:100px; object-fit:cover;'></td>
                        <td>" .$row['name']."</td>
                        <td>" .$row['ingredients']."</td>
                        <td>" .$row['price']."</td>
@@ -55,6 +58,7 @@
 
        </tbody>
    </table>
+    <a href= "create.php"><button type="button" class="btn btn-info">Add Meal</button></a>
 </div>
 
 <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
