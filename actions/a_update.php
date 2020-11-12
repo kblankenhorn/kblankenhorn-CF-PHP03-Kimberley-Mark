@@ -11,7 +11,9 @@ if (isset($_POST)) {
         if (($ext == "jpg") && ($_FILES["uploaded_file"]["type"] == "image/jpeg") &&
 			($_FILES["uploaded_file"]["size"] < 800000)) 
 			{
-            	$newname = dirname(_FILE_).'/img/'.$filename;
+                $newname = dirname(_FILE_).'./img/'.$filename;
+                $newname2 = dirname(_FILE_) . '/img/' . $filename;
+
             // "uploads" is a folder inside of the main folder
             if (!file_exists($newname)) {
                 if ((move_uploaded_file($_FILES['uploaded_file']['tmp_name'], $newname))) {
@@ -19,12 +21,14 @@ if (isset($_POST)) {
                     $ingredients = $_POST['ingredients'];
                     $price = $_POST['price'];
                     $allergens = $_POST['allergens'];
+                    $id = $_POST['id'];
 
-                    $sql = "UPDATE meals SET image = '$newname', name = '$name', ingredients = '$ingredients', price = '$price', allergens = '$allergens' WHERE mealID = {$id}";
-
-                    if (mysqli_query($conn, $sql)) {
+                    $sql = "UPDATE meals SET image = '$newname2', name = '$name', ingredients = '$ingredients', price = '$price', allergens = '$allergens' WHERE mealID = $id";
+                    // var_dump($sql);
+                    
+                    if (mysqli_query($connect, $sql)) {
                         echo '<h2>Updated successfully</h2>';
-                        header("Refresh:2; url=index.php");
+                        header("Refresh:2; url=../index.php");
                     } else {
                         echo "Error: A problem occurred during file upload to the database!";
                     }
@@ -43,8 +47,6 @@ if (isset($_POST)) {
     $price = $_POST['price'];
     $allergens = $_POST['allergens'];
 
-   $id = $_POST['id'];
-
    $sql = "UPDATE meals SET name = '$name', ingredients = '$ingredients', price = '$price', allergens = '$allergens' WHERE mealID = {$id}" ;
    if($connect->query($sql) === TRUE) {
        echo  "<p>Successfully Updated</p>";
@@ -57,5 +59,5 @@ if (isset($_POST)) {
    $connect->close();
 
 }
-
+}
 ?>

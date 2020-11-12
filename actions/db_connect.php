@@ -1,6 +1,7 @@
 <?php 
 
-error_reporting( ~E_DEPRECATED & ~E_NOTICE);
+// error_reporting( ~E_DEPRECATED & ~E_NOTICE);
+error_reporting(E_ERROR | E_PARSE);
 
 $localhost = "127.0.0.1";
 $username = "root";

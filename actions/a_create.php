@@ -8,7 +8,8 @@ if (isset($_POST)) {
         $ext = substr($filename, strrpos($filename, '.') + 1);
 
         if (($ext == "jpg") && ($_FILES["uploaded_file"]["type"] == "image/jpeg") && ($_FILES["uploaded_file"]["size"] < 800000)) {
-            $newname = dirname(_FILE_) . '/img/' . $filename;
+            $newname = dirname(_FILE_) . './img/' . $filename;
+            $newname2 = dirname(_FILE_) . '/img/' . $filename;
 
             if (!file_exists($newname)) {
                 if ((move_uploaded_file($_FILES['uploaded_file']['tmp_name'], $newname))) {
@@ -17,9 +18,9 @@ if (isset($_POST)) {
                     $price = $_POST['price'];
                     $allergens = $_POST['allergens'];
 
-                    $sql = "INSERT INTO meals (image, name, ingredients, price, allergens) VALUES ('$newname', '$name', '$ingredients', '$price', '$allergens')";
+                    $sql = "INSERT INTO meals (image, name, ingredients, price, allergens) VALUES ('$newname2', '$name', '$ingredients', '$price', '$allergens')";
 
-                    if ($conn->query($sql) === true) {
+                    if ($connect->query($sql) === true) {
                         echo "<h2>Created successfully</h2>";
                         header("Refresh:2; url=index.php");
                     } else {
@@ -51,5 +52,5 @@ if (isset($_POST)) {
 
     $connect->close();
 }
-
+}
 ?>

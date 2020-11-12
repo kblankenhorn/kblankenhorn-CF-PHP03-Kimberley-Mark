@@ -41,7 +41,7 @@ if ($_GET['id']) {
 <fieldset>
    <legend>Update Meal</legend>
 
-   <form action="actions/a_update.php" method="post">
+   <form action="actions/a_update.php" method="post" enctype="multipart/form-data">
        <table  class="table table-bordered">
            <tr>
                <th>Image</th >

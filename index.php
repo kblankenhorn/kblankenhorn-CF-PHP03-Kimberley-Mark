@@ -57,7 +57,7 @@ Hi <?php echo $userRow['userEmail' ]; ?>
             if($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                    echo  "<tr>
-                       <td><img src=". $row['image'] ." alt='image' class='img-thumbnail' style='width:100px; height:100px; object-fit:cover;'></td>
+                       <td><img src='". $row['image'] ."' alt='image' class='img-thumbnail' style='width:100px; height:100px; object-fit:cover;'></td>
                        <td>" .$row['name']."</td>
                        <td>" .$row['ingredients']."</td>
                        <td>" .$row['price']."</td>

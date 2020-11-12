@@ -29,7 +29,7 @@ if( !isset($_SESSION['user' ]) ) {
 <fieldset >
    <legend>Add Meal</legend>
 
-   <form  action="actions/a_create.php" method= "post">
+   <form  action="actions/a_create.php" method= "post" enctype="multipart/form-data">
        <table class="table table-bordered">
            <tr>
                <th>Image</th >
