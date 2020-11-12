@@ -22,7 +22,7 @@ if (isset($_POST)) {
 
                     if ($connect->query($sql) === true) {
                         echo "<h2>Created successfully</h2>";
-                        header("Refresh:2; url=index.php");
+                        header("Refresh:2; url=../index.php");
                     } else {
                         echo "Error: A problem occurred during file upload to the database!";
                     }
