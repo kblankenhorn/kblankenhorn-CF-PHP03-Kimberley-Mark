@@ -33,7 +33,7 @@ if( !isset($_SESSION['user' ]) ) {
        <table class="table table-bordered">
            <tr>
                <th>Image</th >
-               <td><input  type="text" name="image"/></td >
+               <td><input type="hidden" name="MAX_FILE_SIZE" value="1000000" /><input type="file" name="uploaded_file" placeholder="choose a file to upload...jpg"><img width="250px"></td >
            </tr>    
            <tr>
                <th>Name</th>

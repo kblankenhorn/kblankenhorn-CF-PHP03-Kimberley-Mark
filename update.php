@@ -44,8 +44,8 @@ if ($_GET['id']) {
    <form action="actions/a_update.php" method="post">
        <table  class="table table-bordered">
            <tr>
-               <th>Image</th>
-               <td><input type="text"  name="image" value="<?php echo $data['image'] ?>"  /></td>
+               <th>Image</th >
+               <td><img  src="<?php echo $row['image'] ?>" width="250px"><input type="hidden" name="MAX_FILE_SIZE" value="1000000" /><input type="file" name="uploaded_file" placeholder="choose a file to upload...jpg"></td >
            </tr >    
            <tr>
                <th>Name</th>
