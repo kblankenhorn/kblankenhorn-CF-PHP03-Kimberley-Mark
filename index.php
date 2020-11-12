@@ -1,4 +1,17 @@
-<?php require_once 'actions/db_connect.php'; ?>
+<?php
+ob_start();
+session_start();
+require_once 'actions/db_connect.php';
+
+// if session is not set this will redirect to login page
+if( !isset($_SESSION['user' ]) ) {
+ header("Location: login.php");
+ exit;
+}
+// select logged-in users details
+$res=mysqli_query($connect, "SELECT * FROM users WHERE userId=".$_SESSION['user']);
+$userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
+?>
 
 <!DOCTYPE html>
 <html>
@@ -11,13 +24,17 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
    
-    <title>Day 3 exercise</title>
+    <title>Welcome - <?php echo $userRow['userEmail' ]; ?></title>
 
 </head>
 <body>
 
 <div class ="container">
   
+Hi <?php echo $userRow['userEmail' ]; ?>
+           
+           <a  href="logout.php?logout">Sign Out</a>
+   
    <table class="table table-bordered mt-5">
        <thead>
            <tr>
@@ -67,3 +84,4 @@
 
 </body>
 </html>
+<?php ob_end_flush(); ?>

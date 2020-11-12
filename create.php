@@ -1,4 +1,14 @@
-<?php require_once 'actions/db_connect.php'; ?>
+<?php
+ob_start();
+session_start();
+require_once 'actions/db_connect.php';
+
+// if session is not set this will redirect to login page
+if( !isset($_SESSION['user' ]) ) {
+ header("Location: login.php");
+ exit;
+}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -56,3 +66,4 @@
 
 </body>
 </html>
+<?php ob_end_flush(); ?>
