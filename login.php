@@ -6,7 +6,10 @@ require_once 'actions/db_connect.php';
 // it will never let you open index(login) page if session is set
 if ( isset($_SESSION['user' ])!="" ) {
  header("Location: index.php");
- exit;
+ exit; // why is exit needed here?
+} elseif(isset($_SESSION['admin'])!="") {
+  header("Location: admin.php");
+  exit;
 }
 
 $error = false;
@@ -41,13 +44,21 @@ if( isset($_POST['btn-login']) ) {
  
   $password = hash( 'sha256', $pass); // password hashing
 
-  $res=mysqli_query($connect, "SELECT userId, userName, userPass FROM users WHERE userEmail='$email'" );
+  $res=mysqli_query($connect, "SELECT userId, userName, userPass, userType FROM users WHERE userEmail='$email'" );
   $row=mysqli_fetch_array($res, MYSQLI_ASSOC);
   $count = mysqli_num_rows($res); // if uname/pass is correct it returns must be 1 row
  
   if( $count == 1 && $row['userPass' ]==$password ) {
-   $_SESSION['user'] = $row['userId'];
-   header( "Location: index.php");
+    if ($row['userType']=="user") {
+      $_SESSION['user'] = $row['userId'];
+      header( "Location: index.php");
+    } elseif($row['userType']=="admin") {
+      $_SESSION['admin'] = $row['userId'];
+      header( "Location: admin.php");
+    } else {
+      $errMSG = "userType in database invalid";
+    }
+
   } else {
    $errMSG = "Incorrect Credentials, Try again..." ;
   }

@@ -4,10 +4,10 @@ session_start();
 require_once 'actions/db_connect.php';
 
 // if session is not set this will redirect to login page
-if(isset($_SESSION['admin'])) {
-    header("Location: admin.php");
+if(isset($_SESSION['user'])) {
+    header("Location: index.php");
     exit;
-} elseif(!isset($_SESSION['user' ]) ) {
+} elseif(!isset($_SESSION['admin']) ) {
  header("Location: login.php");
  exit;
 }
@@ -65,6 +65,10 @@ Hi <?php echo $userRow['userEmail' ]; ?>
                        <td>" .$row['ingredients']."</td>
                        <td>" .$row['price']."</td>
                        <td>" .$row['allergens']."</td>
+                       <td>
+                           <a href='update.php?id=" .$row['mealID']."'><button type='button' class='btn btn-info'>Edit</button></a>
+                           <a href='delete.php?id=" .$row['mealID']."'><button type='button' class='btn btn-info'>Delete</button></a>
+                       </td>
                    </tr>" ;
                }
            } else  {
@@ -74,6 +78,7 @@ Hi <?php echo $userRow['userEmail' ]; ?>
 
        </tbody>
    </table>
+    <a href= "create.php"><button type="button" class="btn btn-info">Add Meal</button></a>
 </div>
 
 <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->

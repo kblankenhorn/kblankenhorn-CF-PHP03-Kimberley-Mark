@@ -1,8 +1,10 @@
 <?php
 ob_start();
 session_start(); // start a new session or continues the previous
-if( isset($_SESSION['user'])!="" ){
+if( isset($_SESSION['user'])!=""){
  header("Location: index.php" ); // redirects to index.php
+} elseif(isset($_SESSION['admin'])!="") {
+   header("Location: admin.php");
 }
 include_once 'actions/db_connect.php';
 $error = false;
